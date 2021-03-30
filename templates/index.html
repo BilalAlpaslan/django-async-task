@@ -1,0 +1,26 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button onclick="buttonClick()">başlat</button>
+        <progress id="mpb" value="0" max="100"></progress>
+    </body>
+</html>
+
+<script>
+    async function buttonClick(){
+        await fetch('http://127.0.0.1:8000/start')
+        console.log("buton tıklandı")
+    }
+    let socket = new WebSocket(
+        "ws://192.168.1.112:5678"
+    );
+    socket.onmessage = function (event) {
+        document.getElementById("mpb").value = event.data;
+    };
+
+</script>
